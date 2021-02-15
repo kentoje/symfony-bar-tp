@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\BeerRepository;
+use App\Repository\CountryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,12 +48,16 @@ class BeerController extends AbstractController
     /**
      * @Route("/beer/{id}", name="beer_id")
      * @param BeerRepository $beerRepository
+     * @param CountryRepository $countryRepository
      * @param int $id
      * @return Response
      */
-    public function beer(BeerRepository $beerRepository, int $id): Response
+    public function beer(BeerRepository $beerRepository, CountryRepository $countryRepository, int $id): Response
     {
         $beer = $beerRepository->find($id);
+        $idCountry = $beer->getCountry()->getId();
+
+        $countryRepository->findOneBy(['id' => $idCountry]);
 
         return $this->render('beer/beer.html.twig', [
             'beer' => $beer,
