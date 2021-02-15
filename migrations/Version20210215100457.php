@@ -28,4 +28,9 @@ final class Version20210215100457 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE category DROP term');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }
