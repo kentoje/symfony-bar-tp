@@ -6,11 +6,12 @@ use App\Entity\Beer;
 use App\Entity\Category;
 use App\Entity\Country;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
 
     private Generator $faker;
@@ -20,24 +21,24 @@ class AppFixtures extends Fixture
         $this->faker = Factory::create('fr_FR');
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $countries = [];
-
-        $names = [
-            'Belgium',
-            'France',
-            'England',
-            'Germany',
-        ];
-        foreach ($names as $name) {
-            $country = new Country();
-            $country->setName($name);
-
-            $manager->persist($country);
-
-            $countries[] = $country;
-        }
+//        $countries = [];
+//
+//        $names = [
+//            'Belgium',
+//            'France',
+//            'England',
+//            'Germany',
+//        ];
+//        foreach ($names as $name) {
+//            $country = new Country();
+//            $country->setName($name);
+//
+//            $manager->persist($country);
+//
+//            $countries[] = $country;
+//        }
 
         $normalCategories = [];
 
@@ -117,26 +118,35 @@ class AppFixtures extends Fixture
                 array_splice($specialsCategoriesCopy, $randomIndex, 1);
             }
 
-            switch($i) {
-                case 0:
-                    $beer->setCountry($countries[0]);
-                    break;
-                case 1:
-                    $beer->setCountry($countries[1]);
-                    break;
-                case 2:
-                    $beer->setCountry($countries[2]);
-                    break;
-                case 3:
-                    $beer->setCountry($countries[3]);
-                    break;
-                default:
-                    $beer->setCountry($countries[random_int(0, count($countries) - 1)]);
-            }
+            dd($this->getReference(CountryFixtures::COUNTRY_REFERENCE));
+
+//            switch($i) {
+//                case 0:
+//                    $beer->setCountry($countries[0]);
+//                    break;
+//                case 1:
+//                    $beer->setCountry($countries[1]);
+//                    break;
+//                case 2:
+//                    $beer->setCountry($countries[2]);
+//                    break;
+//                case 3:
+//                    $beer->setCountry($countries[3]);
+//                    break;
+//                default:
+//                    $beer->setCountry($countries[random_int(0, count($countries) - 1)]);
+//            }
 
             $manager->persist($beer);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            CountryFixtures::class,
+        ];
     }
 }
