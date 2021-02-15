@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
             $countries[] = $country;
         }
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $beer = new Beer();
             $beer
                 ->setName($this->faker->colorName . ' ' . $this->faker->firstNameFemale)
@@ -49,8 +49,24 @@ class AppFixtures extends Fixture
                     0.99,
                     1500
                 ))
-                ->setCountry($countries[random_int(0, count($countries) - 1)])
             ;
+
+            switch($i) {
+                case 0:
+                    $beer->setCountry($countries[0]);
+                    break;
+                case 1:
+                    $beer->setCountry($countries[1]);
+                    break;
+                case 2:
+                    $beer->setCountry($countries[2]);
+                    break;
+                case 3:
+                    $beer->setCountry($countries[3]);
+                    break;
+                default:
+                    $beer->setCountry($countries[random_int(0, count($countries) - 1)]);
+            }
 
             $manager->persist($beer);
         }
