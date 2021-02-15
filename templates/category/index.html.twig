@@ -1,19 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}The Bar - Category{% endblock %}
+
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Beers {{ category.name }}</h1>
-    <span>Beers:</span>
-      <ul class="list-group">
-        {% for beer in beers %}
-          <li class="list-group-item">
-            <a class="link" href="{{ path('beer', { id: beer.id }) }}">
-              <br>{{ beer.name }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    <p>{{ category.description ?? '' }}</p>
+<div class="wrapper row">
+    <div class="sidebar col-sm-6">
+        Sidebar
+    </div>
+    <div class="col-sm-6">
+        <h2>Beers {{ category.name }}</h2>
+        <span>Beers:</span>
+        <ul class="list-group">
+            {% for beer in beers %}
+                <li class="list-group-item">
+                    <a class="link" href="{{ path('beer', { id: beer.id }) }}">
+                        <br>{{ beer.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>{{ category.description ?? '' }}</p>
+    </div>
 </div>
 {% endblock %}

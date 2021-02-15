@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BarController!{% endblock %}
+{% block title %}The Bar - Homepage{% endblock %}
 
 {% block body %}
 
@@ -9,20 +9,17 @@
             Sidebar
         </div>
         <div class="bar col-sm-6">
-            <div class="row">
-                {% for beer in data.beers %}
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <a href="{{ path('beer', { 'id' : beer.id }) }}">
-                                    {{ beer.name }}
-                                </a>
-                                <p class="card-text">{{ beer.description }}</p>
-                            </div>
-                        </div>
+            <h2>{{ data.title }}</h2>
+            {% for beer in data.beers %}
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ path('beer', { 'id' : beer.id }) }}">
+                            {{ beer.name }}
+                        </a>
+                        <p class="card-text">{{ beer.description }}</p>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
