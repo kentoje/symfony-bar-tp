@@ -16,6 +16,24 @@ class BeerController extends AbstractController
      */
     public function index(BeerRepository $beerRepository): Response
     {
+
+        $beers = $beerRepository->lastThreeBeers();
+
+        return $this->render('beer/beer-three.html.twig', [
+            'thebarContent' => [
+                'title' => 'The Bar',
+                'content' => $beers,
+            ],
+        ]);
+    }
+
+    /**
+     * @Route("/beer/all", name="beerAll")
+     * @param BeerRepository $beerRepository
+     * @return Response
+     */
+    public function beers(BeerRepository $beerRepository): Response
+    {
         $beers = $beerRepository->findAll();
 
         return $this->render('beer/index.html.twig', [
