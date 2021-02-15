@@ -19,7 +19,11 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    public function findCatSpecial(int $id)
+    /**
+     * @param int $id
+     * @return Category[] Returns an array of Category objects.
+     */
+    public function findSpecialCatByBeerId(int $id): array
     {
         return $this
             ->createQueryBuilder('c')
@@ -28,18 +32,6 @@ class CategoryRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->andWhere('c.term = :term')
             ->setParameter('term', 'special')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    public function findNormalCats()
-    {
-        return $this
-            ->createQueryBuilder('c')
-            ->orderBy('c.name')
-            ->where('c.term = :term')
-            ->setParameter('term', 'normal')
             ->getQuery()
             ->getResult()
         ;
@@ -61,7 +53,7 @@ class CategoryRepository extends ServiceEntityRepository
 
     /**
      * @return Category[] Returns an array of Category objects.
-     */
+    */
     public function findAllSpecial(): array
     {
         return $this

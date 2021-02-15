@@ -23,13 +23,9 @@ class CategoryController extends AbstractController
         int $id
     ): Response
     {
-
-        $category = $categoryRepository->findOneBy(['id' => $id]);
-        $beers = $beerRepository->findBeersByCategory($id);
-
         return $this->render('category/index.html.twig', [
-            'category' => $category,
-            'beers' => $beers,
+            'category' => $categoryRepository->findOneBy(['id' => $id]),
+            'beers' => $beerRepository->findBeersByCategory($id),
         ]);
     }
 }

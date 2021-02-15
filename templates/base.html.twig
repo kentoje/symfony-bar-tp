@@ -15,7 +15,7 @@
         {{
             render(controller('App\\Controller\\BarController:mainMenu', {
                 'routeName' : app.request.attributes.get('_route'),
-                'category_id' : app.request.attributes.get('id') ?? ''
+                'categoryId' : app.request.attributes.get('id') ?? ''
             }))
         }}
         {% block body %}{% endblock %}

@@ -19,17 +19,25 @@ class BeerRepository extends ServiceEntityRepository
         parent::__construct($registry, Beer::class);
     }
 
-    public function lastThreeBeers()
+    /**
+     * @param int $max
+     * @return Beer[] Returns an array of Category objects.
+     */
+    public function findBeersDesc(int $max): array
     {
         return $this->createQueryBuilder('b')
             ->orderBy('b.id', 'DESC')
-            ->setMaxResults(3)
+            ->setMaxResults($max)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    public function findBeersByCategory(int $id)
+    /**
+     * @param int $id
+     * @return Beer[] Returns an array of Category objects.
+    */
+    public function findBeersByCategory(int $id): array
     {
 
         return $this

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BeerController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="wrapper row">
+    <div class="sidebar col-sm-6">
+        Sidebar
+    </div>
+    <div class="bar col-sm-6">
+        <h2>{{ beers.title }}</h2>
+        <div class="row">
+            {% for beer in beers.content %}
+                <div class="col-sm-6">
+                    <a href="{{ path('beer', { 'id': beer.id }) }}" class="card">
+                        <div class="card-body">
+                            <img src="{{ asset('build/images/beer.jpeg') }}" alt="">
+                            <h5 class="card-title">Name: {{ beer.name }}</h5>
+                            <p class="card-text">Description: {{ beer.description }}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

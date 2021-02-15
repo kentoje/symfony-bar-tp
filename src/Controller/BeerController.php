@@ -12,42 +12,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class BeerController extends AbstractController
 {
     /**
-     * @Route("/beer", name="beer")
+     * @Route("/", name="homepage")
      * @param BeerRepository $beerRepository
      * @return Response
      */
     public function index(BeerRepository $beerRepository): Response
     {
-
-        $beers = $beerRepository->lastThreeBeers();
-
-        return $this->render('beer/beer-three.html.twig', [
-            'thebarContent' => [
+        return $this->render('beer/index.html.twig', [
+            'data' => [
                 'title' => 'The Bar',
-                'content' => $beers,
+                'beers' => $beerRepository->findBeersDesc(3),
             ],
         ]);
     }
 
     /**
-     * @Route("/beer/all", name="beerAll")
+     * @Route("/beer/all", name="beers")
      * @param BeerRepository $beerRepository
      * @return Response
      */
     public function beers(BeerRepository $beerRepository): Response
     {
-        $beers = $beerRepository->findAll();
-
-        return $this->render('beer/index.html.twig', [
+        return $this->render('beer/beers.html.twig', [
             'beers' => [
                 'title' => 'The beers',
-                'content' => $beers,
+                'content' => $beerRepository->findAll(),
             ],
         ]);
     }
 
     /**
-   * @Route("/beer/{id}", name="beer_id")
+   * @Route("/beer/{id}", name="beer")
    * @param BeerRepository $beerRepository
    * @param CountryRepository $countryRepository
    * @param CategoryRepository $categoryRepository
@@ -61,13 +56,21 @@ class BeerController extends AbstractController
         int $id
     ): Response
     {
-        $beer = $beerRepository->find($id);
-        $idCountry = $beer->getCountry()->getId();
-        $countryRepository->findOneBy(['id' => $idCountry]);
-        $categories = $categoryRepository->findCatSpecial($id);
+        $beer = $beerRepository->findOneBy(['id' => $id]);
 
-        $categoriesName = array_map(function ($element) {
-            return $element->getName();
+        if (!$beer) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if ($beer->getCountry()) {
+            $idCountry = $beer->getCountry()->getId();
+            $countryRepository->findOneBy(['id' => $idCountry]);
+        }
+
+        $categories = $categoryRepository->findSpecialCatByBeerId($id);
+
+        $categoriesName = array_map(static function($category) {
+            return $category->getName();
         }, $categories);
 
         return $this->render('beer/beer.html.twig', [

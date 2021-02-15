@@ -19,7 +19,7 @@ class BarController extends AbstractController
     {
         return $this->render('mention/index.html.twig', [
             'sidebarTitle' => 'Sidebar',
-            'thebarContent' => [
+            'data' => [
                 'title' => 'Mentions legales',
                 'content' => [
                     [
@@ -33,22 +33,22 @@ class BarController extends AbstractController
 
     public function mainMenu(
         CategoryRepository $categoryRepository,
-        string $category_id,
+        string $categoryId,
         string $routeName
     ): Response
     {
-        $normalCats = $categoryRepository->findNormalCats();
-        $normalCatNames = array_map(function($element){
+        $normalCategories = $categoryRepository->findAllNormal();
+        $normalCategoriesName = array_map(static function($category) {
             return [
-                'id' => $element->getId(),
-                'name' => $element->getName(),
+                'id' => $category->getId(),
+                'name' => $category->getName(),
             ];
-        }, $normalCats);
+        }, $normalCategories);
 
         return $this->render('partials/menu.html.twig', [
             'routeName' => $routeName,
-            'categoryId' => $category_id,
-            'categories' => $normalCatNames
+            'categoryId' => $categoryId,
+            'categories' => $normalCategoriesName
         ]);
     }
 }
