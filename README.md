@@ -2,6 +2,7 @@
 
 ## .env
 
+```env
 # In all environments, the following files are loaded if they exist,
 # the latter taking precedence over the former:
 #
@@ -30,4 +31,5 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 # DATABASE_URL="mysql://user:password@127.0.0.1:port/db_bafr?serverVersion=serverVersion"
 # DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&charset=utf8"
 ###< doctrine/doctrine-bundle ###
+```
 
