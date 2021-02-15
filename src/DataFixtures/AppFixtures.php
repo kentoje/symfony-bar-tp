@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $beer = new Beer();
             $beer
                 ->setName($this->faker->colorName . ' ' . $this->faker->firstNameFemale)
-                ->setDescription($this->faker->sentence)
+                ->setDescription($this->faker->word)
                 ->setPublishedAt($this->faker->dateTime)
                 ->setDegree($this->faker->randomFloat(
                     2,
