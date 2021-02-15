@@ -24,7 +24,12 @@ class AppFixtures extends Fixture
     {
         $countries = [];
 
-        $names = ['Belgium', 'French', 'English', 'Germany'];
+        $names = [
+            'Belgium',
+            'France',
+            'England',
+            'Germany',
+        ];
         foreach ($names as $name) {
             $country = new Country();
             $country->setName($name);
@@ -36,7 +41,11 @@ class AppFixtures extends Fixture
 
         $normalCategories = [];
 
-        $normalCategoriesNames = ['blonde', 'brune', 'blanche'];
+        $normalCategoriesNames = [
+            'blonde',
+            'brune',
+            'blanche',
+        ];
         foreach ($normalCategoriesNames as $name) {
             $category = new Category();
             $category->setName($name);
@@ -48,7 +57,16 @@ class AppFixtures extends Fixture
 
         $specialsCategories = [];
 
-        $specialsCategoriesNames = ['houblon', 'rose', 'menthe', 'grenadine', 'réglisse', 'marron', 'whisky', 'bio'];
+        $specialsCategoriesNames = [
+            'houblon',
+            'rose',
+            'menthe',
+            'grenadine',
+            'réglisse',
+            'marron',
+            'whisky',
+            'bio',
+        ];
         foreach ($specialsCategoriesNames as $name) {
             $category = new Category();
             $category->setName($name);
@@ -62,7 +80,11 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 20; $i++) {
             $beer = new Beer();
             $beer
-                ->setName($this->faker->colorName . ' ' . $this->faker->firstNameFemale)
+                ->setName(sprintf(
+                    '%s %s',
+                    $this->faker->colorName,
+                    $this->faker->firstNameFemale,
+                ))
                 ->setDescription($this->faker->word)
                 ->setPublishedAt($this->faker->dateTime)
                 ->setDegree($this->faker->randomFloat(
