@@ -19,6 +19,18 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
 
+- start Symfony's server:
+
+```bash
+symfony server:start
+```
+
+- start Webpack's server:
+
+```bash
+npm run dev-server
+```
+
 ## .env
 
 ```env
