@@ -22,13 +22,26 @@ class CategoryRepository extends ServiceEntityRepository
     public function findCatSpecial(int $id)
     {
         return $this
-        ->createQueryBuilder('c')
-        ->join('c.beer', 'b')
-        ->where('b.id = :id')
-        ->setParameter('id', $id)
-        ->andWhere('c.term = :term')
-        ->setParameter('term', 'special')
-        ->getQuery()
-        ->getResult();
+            ->createQueryBuilder('c')
+            ->join('c.beer', 'b')
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->andWhere('c.term = :term')
+            ->setParameter('term', 'special')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findNormalCats()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->orderBy('c.name')
+            ->where('c.term = :term')
+            ->setParameter('term', 'normal')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }

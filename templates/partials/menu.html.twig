@@ -1,22 +1,33 @@
-{% set route_name = app.request.attributes.get('_route') %}
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="#">The Simple Bar/beers</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <li>
+            <a
+              class="nav-link {{ routeName == 'beer' ? 'active' : '' }}"
+              href="{{ path('beer') }}"
+            >
+              Home <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% for category in categories %}
             <li class="nav-item">
-                <a class="nav-link {{ route_name == 'beer' ? 'active' : '' }}" href="{{ path('beer') }}">
-                  Home <span class="sr-only">(current)</span>
-                </a>
+              <a
+                class="nav-link {{ categoryId == category.id ? 'active' : '' }}"
+                href="{{ path('category', { 'id' : category.id })}}"
+              >
+                {{ category.name }}
+              </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link {{ route_name == 'mention' ? 'active' : '' }}" href="{{ path('mention') }}">
-                  Mention
-                </a>
-            </li>
+          {% endfor %}
+          <li class="nav-item">
+              <a
+                class="nav-link {{ routeName == 'mention' ? 'active' : '' }}"
+                href="{{ path('mention') }}"
+              >
+                mention
+              </a>
+          </li>
         </ul>
     </div>
 </nav>

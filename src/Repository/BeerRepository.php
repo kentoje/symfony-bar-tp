@@ -28,4 +28,17 @@ class BeerRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findBeersByCategory(int $id)
+    {
+
+        return $this
+            ->createQueryBuilder('b')
+            ->join('b.categories', 'c')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
