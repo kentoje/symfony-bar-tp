@@ -6,30 +6,16 @@ use App\Repository\BeerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\FetchService;
 
 class BeerController extends AbstractController
 {
-//    const BEERS_URL = 'https://raw.githubusercontent.com/Antoine07/hetic_symfony/main/Introduction/Data/beers.json';
-
-//    public function __construct(FetchService $fetch)
-//    {
-//        $this->fetch = $fetch;
-//    }
-
-//    private function getBeers(): array
-//    {
-//        return $this
-//            ->fetch
-//            ->get(self::BEERS_URL)
-//            ->toArray()
-//        ;
-//    }
-
-    #[Route('/beer', name: 'beer')]
+    /**
+     * @Route("/beer", name="beer")
+     * @param BeerRepository $beerRepository
+     * @return Response
+     */
     public function index(BeerRepository $beerRepository): Response
     {
-//        $data = $this->getBeers();
         $beers = $beerRepository->findAll();
 
         return $this->render('beer/index.html.twig', [
@@ -40,7 +26,12 @@ class BeerController extends AbstractController
         ]);
     }
 
-    #[Route('/beer/{id}', name: 'beer_id')]
+    /**
+     * @Route("/beer/{id}", name="beer_id")
+     * @param BeerRepository $beerRepository
+     * @param int $id
+     * @return Response
+     */
     public function beer(BeerRepository $beerRepository, int $id): Response
     {
         $beer = $beerRepository->find($id);
