@@ -1,5 +1,24 @@
 # The Bar
 
+## Setup
+
+- clone the project
+- run these commands:
+
+```bash
+composer install && npm i
+```
+
+- create a `.env` file and paste below's template
+- set your `DATABASE_URL` according to your configuration
+- run these commands:
+
+```bash
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+```
+
 ## .env
 
 ```env
