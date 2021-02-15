@@ -16,6 +16,7 @@
                     <p class="card-text">Price: {{ beer.price }} €</p>
                     <p class="card-text">Degree: {{ beer.degree }}</p>
                     <p class="card-text">Country: {{ beer.country.name }}</p>
+                    <p class="card-text">Special categories: {{ categories | join(', ') }}</p>
                 </div>
             </div>
         </div>

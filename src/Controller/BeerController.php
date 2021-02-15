@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\BeerRepository;
+use App\Repository\CategoryRepository;
 use App\Repository\CountryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,21 +47,26 @@ class BeerController extends AbstractController
     }
 
     /**
-     * @Route("/beer/{id}", name="beer_id")
-     * @param BeerRepository $beerRepository
-     * @param CountryRepository $countryRepository
-     * @param int $id
-     * @return Response
-     */
-    public function beer(BeerRepository $beerRepository, CountryRepository $countryRepository, int $id): Response
+   * @Route("/beer/{id}", name="beer_id")
+   * @param BeerRepository $beerRepository
+   * @param CountryRepository $countryRepository
+   * @param CategoryRepository $categoryRepository
+   * @param int $id
+   * @return Response
+   */
+    public function beer(BeerRepository $beerRepository, CountryRepository $countryRepository, CategoryRepository $categoryRepository, int $id): Response
     {
         $beer = $beerRepository->find($id);
         $idCountry = $beer->getCountry()->getId();
-
         $countryRepository->findOneBy(['id' => $idCountry]);
+
+        $categoriesName = array_map(function ($element) {
+            return $element->getName();
+        }, $categoryRepository->findCatSpecial($id));
 
         return $this->render('beer/beer.html.twig', [
             'beer' => $beer,
+            'categories' => $categoriesName,
         ]);
     }
 }
