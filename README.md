@@ -1,3 +1,7 @@
+# The Bar
+
+## .env
+
 # In all environments, the following files are loaded if they exist,
 # the latter taking precedence over the former:
 #
@@ -23,6 +27,7 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 # IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml
 #
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
-DATABASE_URL="mysql://root:root@127.0.0.1:3306/db_bafr?serverVersion=mariadb-10.5.8"
+# DATABASE_URL="mysql://user:password@127.0.0.1:port/db_bafr?serverVersion=serverVersion"
 # DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&charset=utf8"
 ###< doctrine/doctrine-bundle ###
+
