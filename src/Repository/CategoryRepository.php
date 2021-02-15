@@ -44,4 +44,32 @@ class CategoryRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Category[] Returns an array of Category objects.
+    */
+    public function findAllNormal(): array
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.term = :val')
+            ->setParameter('val', 'normal')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Category[] Returns an array of Category objects.
+     */
+    public function findAllSpecial(): array
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->where('c.term = :val')
+            ->setParameter('val', 'special')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

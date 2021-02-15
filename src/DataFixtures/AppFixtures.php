@@ -6,113 +6,28 @@ use App\Entity\Beer;
 use App\Entity\Category;
 use App\Entity\Country;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
-use Faker\Generator;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
-
-    private Generator $faker;
-
-    public function __construct()
+    public function load(ObjectManager $manager): void
     {
-        $this->faker = Factory::create('fr_FR');
-    }
+        $countries = $manager->getRepository(Country::class)->findAll();
+        $normalCategories = $manager->getRepository(Category::class)->findAllNormal();
+        $specialsCategories = $manager->getRepository(Category::class)->findAllSpecial();
+        $beers = $manager->getRepository(Beer::class)->findAll();
 
-    public function load(ObjectManager $manager)
-    {
-        $countries = [];
-
-        $names = [
-            'Belgium',
-            'France',
-            'England',
-            'Germany',
-        ];
-        foreach ($names as $name) {
-            $country = new Country();
-            $country->setName($name);
-
-            $manager->persist($country);
-
-            $countries[] = $country;
-        }
-
-        $normalCategories = [];
-
-        $normalCategoriesNames = [
-            'blonde',
-            'brune',
-            'blanche',
-        ];
-        foreach ($normalCategoriesNames as $name) {
-            $category = new Category();
-            $category->setName($name);
-
-            $manager->persist($category);
-
-            $normalCategories[] = $category;
-        }
-
-        $specialsCategories = [];
-
-        $specialsCategoriesNames = [
-            'houblon',
-            'rose',
-            'menthe',
-            'grenadine',
-            'réglisse',
-            'marron',
-            'whisky',
-            'bio',
-        ];
-        foreach ($specialsCategoriesNames as $name) {
-            $category = new Category();
-            $category->setName($name);
-            $category->setTerm('special');
-
-            $manager->persist($category);
-
-            $specialsCategories[] = $category;
-        }
-
-        for ($i = 0; $i < 20; $i++) {
-            $beer = new Beer();
-            $beer
-                ->setName(sprintf(
-                    '%s %s',
-                    $this->faker->colorName,
-                    $this->faker->firstNameFemale,
-                ))
-                ->setDescription($this->faker->word)
-                ->setPublishedAt($this->faker->dateTime)
-                ->setDegree($this->faker->randomFloat(
-                    2,
-                    3,
-                    100
-                ))
-                ->setPrice($this->faker->randomFloat(
-                    2,
-                    0.99,
-                    1500
-                ))
-                ->addCategory($normalCategories[random_int(
-                    0,
-                    count($normalCategories) - 1
-                )])
-            ;
-
+        foreach ($beers as $i => $beer) {
             $randomNumber = random_int(1, count($specialsCategories));
-
             $specialsCategoriesCopy = [...$specialsCategories];
 
-            for ($index = $randomNumber; $index > 0; $index--) {
+            $beer->addCategory($normalCategories[random_int(0, count($normalCategories) - 1)]);
+
+            for ($j = $randomNumber; $j > 0; $j--) {
                 $randomIndex = random_int(0, count($specialsCategoriesCopy) - 1);
 
-                $getRandomCategory = $specialsCategoriesCopy[$randomIndex];
-
-                $beer->addCategory($getRandomCategory);
+                $beer->addCategory($specialsCategoriesCopy[$randomIndex]);
 
                 array_splice($specialsCategoriesCopy, $randomIndex, 1);
             }
@@ -138,5 +53,15 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            CountryFixtures::class,
+            CategoryNormalFixtures::class,
+            CategorySpecialFixtures::class,
+            BeerFixtures::class,
+        ];
     }
 }
