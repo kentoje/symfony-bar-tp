@@ -46,7 +46,7 @@ class ClientRepository extends ServiceEntityRepository
             ->getResult()
         ;
 
-        return (float) $data['average'];
+        return $data['average'];
     }
 
     /**

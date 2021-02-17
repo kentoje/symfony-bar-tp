@@ -10,6 +10,7 @@ use Faker\Generator;
 
 class BeerFixtures extends Fixture
 {
+    public const MAX = 20;
 
     private Generator $faker;
 
@@ -20,7 +21,7 @@ class BeerFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < self::MAX; $i++) {
             $beer = new Beer();
             $beer
                 ->setName(sprintf(
