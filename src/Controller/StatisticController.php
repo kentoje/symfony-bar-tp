@@ -22,7 +22,7 @@ class StatisticController extends AbstractController
             'data' => [
                 'clients' => $clients,
                 'count' => count($clients),
-                'average' => $clientRepository->averageBeerPerClient(),
+                'average' => $clientRepository->calcAverageBeerPerClient(),
                 'stdDeviation' => $clientRepository->findStandardDeviationFromNumBeer(),
             ],
         ]);

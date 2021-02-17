@@ -30,7 +30,7 @@ class BarController extends AbstractController
 
     public function mainMenu(
         CategoryRepository $categoryRepository,
-        string $categoryId,
+        string $id,
         string $routeName
     ): Response
     {
@@ -44,7 +44,9 @@ class BarController extends AbstractController
 
         return $this->render('partials/menu.html.twig', [
             'routeName' => $routeName,
-            'categoryId' => $categoryId,
+            'categoryId' => $routeName === 'beer'
+                ? $categoryRepository->findNormalCategoryByBeerId($id)->getId()
+                : $id,
             'categories' => $normalCategoriesName
         ]);
     }

@@ -66,7 +66,7 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Category Returns a Beer.
+     * @return Category Returns a Category.
     */
     public function findFirstOne(): Category
     {
@@ -78,5 +78,25 @@ class CategoryRepository extends ServiceEntityRepository
         ;
 
         return $result[0];
+    }
+
+    /**
+     * @param int $beerId
+     * @return Category Returns a Category.
+     */
+    public function findNormalCategoryByBeerId(int $beerId): Category
+    {
+        [$category] = $this
+            ->createQueryBuilder('c')
+            ->join('c.beer', 'b')
+            ->where('b.id = :beerId')
+            ->setParameter('beerId', $beerId)
+            ->andWhere('c.term = :term')
+            ->setParameter('term', 'normal')
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $category;
     }
 }

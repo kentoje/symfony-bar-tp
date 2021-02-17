@@ -37,11 +37,11 @@ class ClientRepository extends ServiceEntityRepository
     /**
      * @return float Returns float average.
     */
-    public function averageBeerPerClient(): float
+    public function calcAverageBeerPerClient(): float
     {
         [$data] = $this
             ->createQueryBuilder('b')
-            ->select('SUM(b.number_beer) / COUNT(b) AS average')
+            ->select('AVG(b.number_beer) AS average')
             ->getQuery()
             ->getResult()
         ;

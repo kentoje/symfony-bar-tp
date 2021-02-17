@@ -12,10 +12,11 @@
         {% endblock %}
     </head>
     <body>
+        {# render pass an id argument, because it can be either a category id or a beer id depending on the route name. #}
         {{
             render(controller('App\\Controller\\BarController:mainMenu', {
                 'routeName' : app.request.attributes.get('_route'),
-                'categoryId' : app.request.attributes.get('id') ?? ''
+                'id' : app.request.attributes.get('id') ?? ''
             }))
         }}
         {% block body %}{% endblock %}
