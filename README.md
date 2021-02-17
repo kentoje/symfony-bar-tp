@@ -74,18 +74,18 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 
 ### Question 4
 Code to write in the Category Repository.
-```
+```php
 public function findCatSpecial(int $id)
-    {
-        return $this->createQueryBuilder('c')
-            ->join('c.beers', 'b') // raisonner en terme de relation
-            ->where('b.id = :id')
-            ->setParameter('id', $id)
-            ->andWhere('c.term = :term')
-            ->setParameter('term', 'special')
-            ->getQuery()
-            ->getResult();
-    }
+{
+    return $this->createQueryBuilder('c')
+        ->join('c.beers', 'b') // raisonner en terme de relation
+        ->where('b.id = :id')
+        ->setParameter('id', $id)
+        ->andWhere('c.term = :term')
+        ->setParameter('term', 'special')
+        ->getQuery()
+        ->getResult();
+}
 ```
 
 #### Explanation
