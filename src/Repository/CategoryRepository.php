@@ -64,4 +64,19 @@ class CategoryRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Category Returns a Beer.
+    */
+    public function findFirstOne(): Category
+    {
+        $result = $this
+            ->createQueryBuilder('c')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result[0];
+    }
 }
