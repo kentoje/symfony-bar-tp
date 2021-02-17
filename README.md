@@ -4,16 +4,12 @@
 
 - clone the project
 - create a `.env` file and paste below's template
-- run these commands:
-
-```bash
-composer install && npm i
-```
-
 - set your `DATABASE_URL` according to your configuration
 - run these commands:
 
 ```bash
+composer install && npm i
+
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
@@ -71,7 +67,7 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 # IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml
 #
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
-# DATABASE_URL="mysql://user:password@127.0.0.1:port/db_bafr?serverVersion=serverVersion"
+# DATABASE_URL="mysql://USER:PASSWORD@127.0.0.1:PORT/DB_NAME?serverVersion=SERVER_VERSION"
 # DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&charset=utf8"
 ###< doctrine/doctrine-bundle ###
 ```
