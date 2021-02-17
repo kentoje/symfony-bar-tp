@@ -88,14 +88,14 @@ class CategoryRepository extends ServiceEntityRepository
     */
     public function findFirstOne(): Category
     {
-        $result = $this
+        [$category] = $this
             ->createQueryBuilder('c')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
 
-        return $result[0];
+        return $category;
     }
 
     /**

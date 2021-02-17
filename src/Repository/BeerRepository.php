@@ -21,8 +21,8 @@ class BeerRepository extends ServiceEntityRepository
 
     /**
      * @param int $max
-     * @return Beer[] Returns an array of Category objects.
-     */
+     * @return Beer[] Returns an array of Beers.
+    */
     public function findBeersDesc(int $max): array
     {
         return $this->createQueryBuilder('b')
@@ -35,7 +35,7 @@ class BeerRepository extends ServiceEntityRepository
 
     /**
      * @param int $id
-     * @return Beer[] Returns an array of Category objects.
+     * @return Beer[] Returns an array of Beers.
     */
     public function findBeersByCategory(int $id): array
     {
@@ -55,19 +55,19 @@ class BeerRepository extends ServiceEntityRepository
     */
     public function findFirstOne(): Beer
     {
-        $result = $this
+        [$beer] = $this
             ->createQueryBuilder('b')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
 
-        return $result[0];
+        return $beer;
     }
 
     /**
      * @param int $countryId
-     * @return Beer[] Returns Beers.
+     * @return Beer[] Returns an array of Beers.
     */
     public function findAllBeersFromCountry(int $countryId): array
     {

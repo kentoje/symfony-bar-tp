@@ -24,14 +24,14 @@ class ClientRepository extends ServiceEntityRepository
     */
     public function findFirstOne(): Client
     {
-        $result = $this
+        [$client] = $this
             ->createQueryBuilder('c')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
 
-        return $result[0];
+        return $client;
     }
 
     /**

@@ -20,7 +20,7 @@
                             <li class="card" style="padding: 24px; margin: 16px 0">
                                 <p class="card-title">Name : <a href="{{ path('beer', { id: beer.id }) }}">{{ beer.name }}</a></p>
                                 <p class="card-text">Description : {{ beer.description }}</p>
-                                <p class="card-text">Price : {{ beer.price }}</p>
+                                <p class="card-text">Price : {{ beer.price }} €</p>
                                 <p class="card-text">Degree : {{ beer.degree }}</p>
                             </li>
                         {% endfor %}

@@ -15,7 +15,7 @@ class BeerController extends AbstractController
      * @Route("/", name="homepage")
      * @param BeerRepository $beerRepository
      * @return Response
-     */
+    */
     public function index(BeerRepository $beerRepository): Response
     {
         return $this->render('beer/index.html.twig', [
@@ -30,7 +30,7 @@ class BeerController extends AbstractController
      * @Route("/beer/all", name="beers")
      * @param BeerRepository $beerRepository
      * @return Response
-     */
+    */
     public function beers(BeerRepository $beerRepository): Response
     {
         return $this->render('beer/beers.html.twig', [
@@ -42,13 +42,13 @@ class BeerController extends AbstractController
     }
 
     /**
-   * @Route("/beer/{id}", name="beer")
-   * @param BeerRepository $beerRepository
-   * @param CountryRepository $countryRepository
-   * @param CategoryRepository $categoryRepository
-   * @param int $id
-   * @return Response
-   */
+     * @Route("/beer/{id}", name="beer")
+     * @param BeerRepository $beerRepository
+     * @param CountryRepository $countryRepository
+     * @param CategoryRepository $categoryRepository
+     * @param int $id
+     * @return Response
+    */
     public function beer(
         BeerRepository $beerRepository,
         CountryRepository $countryRepository,

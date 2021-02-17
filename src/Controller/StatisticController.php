@@ -13,7 +13,7 @@ class StatisticController extends AbstractController
      * @Route("/statistic", name="statistic")
      * @param ClientRepository $clientRepository
      * @return Response
-     */
+    */
     public function index(ClientRepository $clientRepository): Response
     {
         $clients = $clientRepository->findAllOrderByBeerDesc();

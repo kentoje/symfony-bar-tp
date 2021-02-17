@@ -16,7 +16,7 @@ class CategoryController extends AbstractController
      * @param BeerRepository $beerRepository
      * @param int $id
      * @return Response
-     */
+    */
     public function index(
         CategoryRepository $categoryRepository,
         BeerRepository $beerRepository,
