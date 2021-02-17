@@ -49,4 +49,19 @@ class BeerRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Beer Returns a Beer.
+    */
+    public function findFirstOne(): Beer
+    {
+        $result = $this
+            ->createQueryBuilder('b')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result[0];
+    }
 }

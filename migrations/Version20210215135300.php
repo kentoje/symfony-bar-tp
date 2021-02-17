@@ -44,4 +44,9 @@ final class Version20210215135300 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_649B469CDC2902E0 ON statistic (client_id_id)');
         $this->addSql('CREATE INDEX IDX_649B469C872EC465 ON statistic (beer_id_id)');
     }
+
+    public function isTransactional() : bool
+    {
+        return false;
+    }
 }

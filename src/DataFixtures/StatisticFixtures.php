@@ -2,74 +2,35 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
-
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
-// Vos entités
-use App\Entity\Client;
-use App\Entity\Statistic;
 use App\Entity\Beer;
-use Faker\Factory;
-use Faker\Generator;
+use App\Entity\Category;
+use App\Entity\Client;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use App\Entity\Statistic;
 
-class StatisticFixtures extends Fixture implements DependentFixtureInterface
+class StatisticFixtures extends Fixture
 {
-    private Generator $faker;
+    public const MAX = 20;
 
-    public function __construct(EntityManagerInterface $em)
+    public function load(ObjectManager $manager): void
     {
-        $this->em = $em;
-        $this->faker = Factory::create('fr_FR');
+        $beer = $manager->getRepository(Beer::class)->findFirstOne();
+        $client = $manager->getRepository(Client::class)->findFirstOne();
+        $category = $manager->getRepository(Category::class)->findFirstOne();
 
-    }
-
-    public function load(ObjectManager $manager)
-    {
-
-        $clients = [];
-
-        for ($i = 0; $i < 10; $i++) {
-            $client = new Client();
-            $client
-                ->setEmail($this->faker->email)
-                ->setName($this->faker->name)
-                ->setAge(rand(18, 99))
-                ->setWeight(rand(0, 100))
-                ->setNumberBeer(rand(1, 200));
-            $manager->persist($client);
-
-            array_push($clients, $client);
-        }
-        $manager->flush();
-
-
-        $repository = $this->em->getRepository(Beer::class);
-        $beers = $repository->findAll();
-
-        $repositoryCategory = $this->em->getRepository(Category::class);
-        $categories = $repositoryCategory->findAll();
-
-
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < self::MAX; $i++) {
             $statistic = new Statistic();
             $statistic
-                ->setClientId($clients[rand(0, count($clients) - 1)])
-                ->setBeerId($beers[rand(0, count($beers) - 1)])
-                ->setCategoryId($categories[rand(0, count($categories) - 1)]->getId())
-                ->setScore(rand(0, 20));
+                ->setScore(random_int(0, 20))
+                ->setClientId($client)
+                ->setBeerId($beer)
+                ->setCategoryId($category->getId())
+            ;
+
             $manager->persist($statistic);
         }
-        $manager->flush();
-    }
 
-    public function getDependencies()
-    {
-        return array(
-            AppFixtures::class,
-        );
+        $manager->flush();
     }
 }
