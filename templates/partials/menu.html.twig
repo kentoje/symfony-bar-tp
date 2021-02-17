@@ -20,14 +20,22 @@
               </a>
             </li>
           {% endfor %}
-        <li class="nav-item">
-            <a
+          <li class="nav-item">
+              <a
                 class="nav-link {{ routeName == 'statistic' ? 'active' : '' }}"
                 href="{{ path('statistic') }}"
-            >
-                Statistic
-            </a>
-        </li>
+              >
+                  Statistic
+              </a>
+          </li>
+          <li class="nav-item">
+              <a
+                class="nav-link {{ routeName == 'countries' or routeName == 'country' ? 'active' : '' }}"
+                href="{{ path('countries') }}"
+              >
+                  Countries
+              </a>
+          </li>
           <li class="nav-item">
               <a
                 class="nav-link {{ routeName == 'mention' ? 'active' : '' }}"

@@ -64,4 +64,20 @@ class BeerRepository extends ServiceEntityRepository
 
         return $result[0];
     }
+
+    /**
+     * @param int $countryId
+     * @return Beer[] Returns Beers.
+     */
+    public function findAllBeersFromCountry(int $countryId): array
+    {
+        return $this
+            ->createQueryBuilder('b')
+            ->join('b.country', 'c')
+            ->where('c.id = :id')
+            ->setParameter('id', $countryId)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - Countries{% endblock %}
+
+{% block body %}
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Sidebar
+        </div>
+        <div class="bar col-sm-6">
+            {% for country in countries %}
+                <div class="card">
+                    <div class="card-body">
+                        <p>Name : <a href="{{ path('country', { id: country.id }) }}">{{ country.name }}</a>, </p>
+                        <p>Address : {{ country.address }}, </p>
+                        <p>Email : {{ country.email }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

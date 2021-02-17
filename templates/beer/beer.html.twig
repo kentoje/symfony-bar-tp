@@ -16,7 +16,9 @@
                     <p class="card-text">Price: {{ beer.price }} €</p>
                     <p class="card-text">Degree: {{ beer.degree }}</p>
                     {% if beer.country is defined %}
-                        <p class="card-text">Country: {{ beer.country.name }}</p>
+                        <p class="card-text">
+                            Country: <a href="{{ path('country', { id: beer.country.id }) }}">{{ beer.country.name }}</a>
+                        </p>
                     {% endif %}
                     <p class="card-text">Special categories: {{ categories | join(', ') }}</p>
                 </div>
