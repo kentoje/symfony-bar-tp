@@ -20,12 +20,20 @@
               </a>
             </li>
           {% endfor %}
+        <li class="nav-item">
+            <a
+                class="nav-link {{ routeName == 'statistic' ? 'active' : '' }}"
+                href="{{ path('statistic') }}"
+            >
+                Statistic
+            </a>
+        </li>
           <li class="nav-item">
               <a
                 class="nav-link {{ routeName == 'mention' ? 'active' : '' }}"
                 href="{{ path('mention') }}"
               >
-                mention
+                Mention
               </a>
           </li>
         </ul>

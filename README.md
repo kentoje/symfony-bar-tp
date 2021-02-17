@@ -106,12 +106,11 @@ This code is useful if we are on the product page of a beer and we want to displ
 
 ### MLD - MLD - UML
 
-#### MLD 
+#### MLD
 ![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/MLD_schema.png)
 
-#### MCD 
+#### MCD
 ![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/MCD_schema.png)
 
 #### UML
 ![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/UML_schema.png)
-
