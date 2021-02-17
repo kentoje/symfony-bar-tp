@@ -78,11 +78,11 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 ### MLD - MLD - UML
 
 #### MLD 
-![alt text](https://github.com/kentoje/symfony-bar-tp/blob/feat/bar-part3/schemas/MLD_schema.png)
+![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/MLD_schema.png)
 
 #### MCD 
-![alt text](https://github.com/kentoje/symfony-bar-tp/blob/feat/bar-part3/schemas/MCD_schema.png)
+![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/MCD_schema.png)
 
 #### UML
-![alt text](https://github.com/kentoje/symfony-bar-tp/blob/feat/bar-part3/schemas/UML_schema.png)
+![alt text](https://github.com/kentoje/symfony-bar-tp/blob/master/schemas/UML_schema.png)
 
