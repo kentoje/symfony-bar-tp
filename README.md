@@ -3,13 +3,13 @@
 ## Setup
 
 - clone the project
+- create a `.env` file and paste below's template
 - run these commands:
 
 ```bash
 composer install && npm i
 ```
 
-- create a `.env` file and paste below's template
 - set your `DATABASE_URL` according to your configuration
 - run these commands:
 
