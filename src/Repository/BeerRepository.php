@@ -68,7 +68,7 @@ class BeerRepository extends ServiceEntityRepository
     /**
      * @param int $countryId
      * @return Beer[] Returns Beers.
-     */
+    */
     public function findAllBeersFromCountry(int $countryId): array
     {
         return $this

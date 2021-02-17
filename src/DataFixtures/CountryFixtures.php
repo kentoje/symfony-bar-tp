@@ -11,11 +11,15 @@ use Faker\Generator;
 class CountryFixtures extends Fixture
 {
 
-    private Generator $faker;
+    private Generator $fakerFr;
+    private Generator $fakerEn;
+    private Generator $fakerDe;
 
     public function __construct()
     {
-        $this->faker = Factory::create('fr_FR');
+        $this->fakerFr = Factory::create('fr_FR');
+        $this->fakerEn = Factory::create('en_GB');
+        $this->fakerDe = Factory::create('de_DE');
     }
 
     public const COUNTRIES = [
@@ -31,9 +35,22 @@ class CountryFixtures extends Fixture
             $country = new Country();
             $country
                 ->setName($name)
-                ->setAddress($this->faker->address)
-                ->setEmail($this->faker->email)
+                ->setEmail($this->fakerFr->email)
             ;
+
+            switch ($name) {
+                case 'England':
+                    $country->setAddress($this->fakerEn->address);
+                    break;
+                case 'France' || 'Belgium':
+                    $country->setAddress($this->fakerFr->address);
+                    break;
+                case 'Germany':
+                    $country->setAddress($this->fakerDe->address);
+                    break;
+                default:
+                    $country->setAddress($this->fakerEn->address);
+            }
 
             $manager->persist($country);
         }

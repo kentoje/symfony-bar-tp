@@ -14,7 +14,7 @@ class CountryController extends AbstractController
      * @Route("/countries", name="countries")
      * @param CountryRepository $countryRepository
      * @return Response
-     */
+    */
     public function index(CountryRepository $countryRepository): Response
     {
         return $this->render('country/index.html.twig', [
@@ -28,7 +28,7 @@ class CountryController extends AbstractController
      * @param BeerRepository $beerRepository
      * @param int $id
      * @return Response
-     */
+    */
     public function country(CountryRepository $countryRepository, BeerRepository $beerRepository, int $id): Response
     {
         return $this->render('country/country.html.twig', [
