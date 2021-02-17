@@ -38,6 +38,24 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $id
+     * @return Category[] Returns an array of Category objects.
+     */
+    public function findNormalCatByBeerId(int $id): array
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->join('c.beer', 'b')
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->andWhere('c.term = :term')
+            ->setParameter('term', 'normal')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * @return Category[] Returns an array of Category objects.
     */
     public function findAllNormal(): array

@@ -73,6 +73,10 @@ class BeerController extends AbstractController
             return $category->getName();
         }, $categories);
 
+        [$normalCategory] = $categoryRepository->findNormalCatByBeerId($id);
+
+        array_unshift($categoriesName, $normalCategory->getName());
+
         return $this->render('beer/beer.html.twig', [
             'beer' => $beer,
             'categories' => $categoriesName,
