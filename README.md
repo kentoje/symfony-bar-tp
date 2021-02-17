@@ -75,6 +75,35 @@ APP_SECRET=84bb3174e5f7b887d2e9b785cb8220b0
 # DATABASE_URL="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&charset=utf8"
 ###< doctrine/doctrine-bundle ###
 ```
+
+### Question 4
+Code to write in the Category Repository.
+```
+public function findCatSpecial(int $id)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.beers', 'b') // raisonner en terme de relation
+            ->where('b.id = :id')
+            ->setParameter('id', $id)
+            ->andWhere('c.term = :term')
+            ->setParameter('term', 'special')
+            ->getQuery()
+            ->getResult();
+    }
+```
+
+#### Explanation
+
+This code will get all the categories of term "special" of a specific beer.
+
+The query will first find all categories which id is in the matching results in beer_category table where the beer_id is the same as the $id passed in param.
+Those categories results will then be filtered to keep only those that have the term "special".
+
+### Utility
+
+This code is useful if we are on the product page of a beer and we want to display all the special categories of the beer.
+
+
 ### MLD - MLD - UML
 
 #### MLD 
