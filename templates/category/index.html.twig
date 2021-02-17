@@ -17,6 +17,7 @@
                     <a class="link" href="{{ path('beer', { id: beer.id }) }}">
                         <br>{{ beer.name }}
                     </a>
+                    <p>Description : {{ beer.description }}</p>
                 </li>
             {% endfor %}
         </ul>

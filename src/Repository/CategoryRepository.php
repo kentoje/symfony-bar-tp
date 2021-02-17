@@ -22,7 +22,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @param int $id
      * @return Category[] Returns an array of Category objects.
-     */
+    */
     public function findSpecialCatByBeerId(int $id): array
     {
         return $this
@@ -40,7 +40,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @param int $id
      * @return Category[] Returns an array of Category objects.
-     */
+    */
     public function findNormalCatByBeerId(int $id): array
     {
         return $this
@@ -101,7 +101,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @param int $beerId
      * @return Category Returns a Category.
-     */
+    */
     public function findNormalCategoryByBeerId(int $beerId): Category
     {
         [$category] = $this

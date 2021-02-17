@@ -14,12 +14,14 @@ class CountryFixtures extends Fixture
     private Generator $fakerFr;
     private Generator $fakerEn;
     private Generator $fakerDe;
+    private Generator $fakerBe;
 
     public function __construct()
     {
         $this->fakerFr = Factory::create('fr_FR');
         $this->fakerEn = Factory::create('en_GB');
         $this->fakerDe = Factory::create('de_DE');
+        $this->fakerBe = Factory::create('nl_NL');
     }
 
     public const COUNTRIES = [
@@ -33,23 +35,38 @@ class CountryFixtures extends Fixture
     {
         foreach (self::COUNTRIES as $name) {
             $country = new Country();
-            $country
-                ->setName($name)
-                ->setEmail($this->fakerFr->email)
-            ;
+            $country->setName($name);
 
             switch ($name) {
                 case 'England':
-                    $country->setAddress($this->fakerEn->address);
+                    $country
+                        ->setAddress($this->fakerEn->address)
+                        ->setEmail($this->fakerEn->email)
+                    ;
                     break;
-                case 'France' || 'Belgium':
-                    $country->setAddress($this->fakerFr->address);
+                case 'France':
+                    $country
+                        ->setAddress($this->fakerFr->address)
+                        ->setEmail($this->fakerFr->email)
+                    ;
+                    break;
+                case 'Belgium':
+                    $country
+                        ->setAddress($this->fakerBe->address)
+                        ->setEmail($this->fakerBe->email)
+                    ;
                     break;
                 case 'Germany':
-                    $country->setAddress($this->fakerDe->address);
+                    $country
+                        ->setAddress($this->fakerDe->address)
+                        ->setEmail($this->fakerDe->email)
+                    ;
                     break;
                 default:
-                    $country->setAddress($this->fakerEn->address);
+                    $country
+                        ->setAddress($this->fakerEn->address)
+                        ->setEmail($this->fakerEn->email)
+                    ;
             }
 
             $manager->persist($country);
