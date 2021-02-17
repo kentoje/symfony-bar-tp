@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - Statistic{% endblock %}
+
+{% block body %}
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Nombre de clients : {{ data.count }}
+            <br>
+            Moyenne de bière acheté par client : {{ data.average }}
+            <br>
+            L'écart type par rapport au nombre de bière est de : {{ data.stdDeviation|number_format(2) }}
+        </div>
+        <div class="bar col-sm-6">
+            {% for client in data.clients %}
+                <div class="card">
+                    <div class="card-body">
+                        <span>{{ client.name }}, </span>
+                        <span>age {{ client.age }}, </span>
+                        <span>nombre de bière acheté : {{ client.numberBeer }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
