@@ -31,7 +31,19 @@ symfony server:start
 npm run dev-server
 ```
 
-## .env
+## Team
+
+| Last name | First name |
+| --- | --- |
+| ROMANA | Julian |
+| LIMONGI | Virgil |
+| TOMBUYSES | Emilie |
+| LEMIRE | Tristan |
+| MONTHUBERT | Kento |
+
+## Template
+
+### .env
 
 ```env
 # In all environments, the following files are loaded if they exist,
