@@ -25,10 +25,16 @@ class QuoteFixtures extends Fixture
             $quote = new Quote();
             $quote
                 ->setTitle(sprintf(
-                    "Quote %s",
+                    "%s Quote %s",
+                    addslashes('#'),
                     $this->faker->title,
                 ))
-                ->setContent($this->faker->sentence)
+                ->setContent(sprintf(
+                    "%s%s%s",
+                    addslashes('`'),
+                    $this->faker->sentence,
+                    addslashes('`'),
+                ))
             ;
 
             $manager->persist($quote);

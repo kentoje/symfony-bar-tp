@@ -13,8 +13,8 @@
                 {% for quote in quotes %}
                     <div class="col-sm-6">
                         <div class="card-body">
-                            <h5 class="card-title">{{ quote.title }}</h5>
-                            <p class="card-text">{{ quote.content }}</p>
+                            <h5 class="card-title">{{ quote.title|raw }}</h5>
+                            <p class="card-text">{{ quote.content|raw }}</p>
                         </div>
                     </div>
                 {% endfor %}

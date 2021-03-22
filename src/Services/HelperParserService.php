@@ -19,4 +19,22 @@ class HelperParserService {
             ->parse($content)
         ;
     }
+
+    public function parseObjects(array $objs, array $keys): array
+    {
+        $methods = array_map(static function ($key) {
+            return [
+                sprintf('get%s', ucfirst($key)),
+                sprintf('set%s', ucfirst($key))
+            ];
+        }, $keys);
+
+        return array_map(function ($obj) use ($methods) {
+            foreach ($methods as [$get, $set]) {
+                $obj->{$set}($this->parse($obj->{$get}()));
+            }
+
+            return $obj;
+        }, $objs);
+    }
 }
