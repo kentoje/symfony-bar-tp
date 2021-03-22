@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - Quotes{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Sidebar
+        </div>
+        <div class="bar col-sm-6">
+            <div class="row">
+                {% for quote in quotes %}
+                    <div class="col-sm-6">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ quote.title }}</h5>
+                            <p class="card-text">{{ quote.content }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,6 +10,22 @@
               Home <span class="sr-only">(current)</span>
             </a>
           </li>
+          <li>
+              <a
+                      class="nav-link {{ routeName == 'showService' ? 'active' : '' }}"
+                      href="{{ path('showService') }}"
+              >
+                  showService <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          <li>
+              <a
+                      class="nav-link {{ routeName == 'quotes' ? 'active' : '' }}"
+                      href="{{ path('quotes') }}"
+              >
+                  Quotes <span class="sr-only">(current)</span>
+              </a>
+          </li>
           {% for category in categories %}
             <li class="nav-item">
               <a

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Repository\BeerRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CountryRepository;
+use App\Services\HelloService;
+use App\Services\HelperParserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +17,7 @@ class BeerController extends AbstractController
      * @Route("/", name="homepage")
      * @param BeerRepository $beerRepository
      * @return Response
-    */
+     */
     public function index(BeerRepository $beerRepository): Response
     {
         return $this->render('beer/index.html.twig', [
@@ -23,6 +25,23 @@ class BeerController extends AbstractController
                 'title' => 'The Bar',
                 'beers' => $beerRepository->findBeersDesc(3),
             ],
+        ]);
+    }
+
+    /**
+     * @Route("/showService", name="showService")
+     * @param HelloService $hello
+     * @param HelperParserService $helperParser
+     * @return Response
+     */
+    public function showService(HelloService $hello, HelperParserService $helperParser): Response
+    {
+        $content = "* Pommes \n* Poires
+    * Sous élément avec au moins quatre espaces devant.";
+
+        return $this->render('hello/index.html.twig', [
+            'hello' => $hello->say(),
+            'markdown' => $helperParser->parse($content)
         ]);
     }
 
