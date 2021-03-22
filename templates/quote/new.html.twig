@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - Form Quote{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Sidebar
+        </div>
+        <div class="bar col-sm-6">
+            <div class="row">
+                {{ form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
