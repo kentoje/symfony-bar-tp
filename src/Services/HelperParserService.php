@@ -7,9 +7,9 @@ use cebe\markdown\Markdown;
 class HelperParserService {
     private Markdown $parser;
 
-    public function __construct()
+    public function __construct(Markdown $parser)
     {
-        $this->parser = new Markdown();
+        $this->parser = $parser;
     }
 
     public function parse(string $content): string
