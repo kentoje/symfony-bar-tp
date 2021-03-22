@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Quote;
 use App\Repository\QuoteRepository;
 use App\Services\HelperParserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
