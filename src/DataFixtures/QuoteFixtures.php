@@ -32,7 +32,7 @@ class QuoteFixtures extends Fixture
                 ->setContent(sprintf(
                     "%s%s%s",
                     addslashes('`'),
-                    $this->faker->sentence,
+                    $this->faker->firstNameFemale,
                     addslashes('`'),
                 ))
             ;
