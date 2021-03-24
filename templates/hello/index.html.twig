@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - showService{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Sidebar
+        </div>
+        <div class="bar col-sm-6">
+            {{ hello }}
+            <div class="row">
+                {{ markdown|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

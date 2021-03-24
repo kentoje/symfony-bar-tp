@@ -79,6 +79,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             BeerFixtures::class,
             ClientFixtures::class,
             StatisticFixtures::class,
+            QuoteFixtures::class,
         ];
     }
 }
