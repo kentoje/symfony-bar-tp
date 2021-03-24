@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Bar - Recommended{% endblock %}
+
+{% block body %}
+    <div class="wrapper row">
+        <div class="sidebar col-sm-6">
+            Sidebar
+        </div>
+        <div class="bar col-sm-6">
+            <h2>{{ beers.title }}</h2>
+            <div class="row">
+                {% for beer in beers.content %}
+                    <div class="col-sm-6">
+                        <a href="{{ path('beer', { 'id': beer.id }) }}" class="card">
+                            <div class="card-body">
+                                <img src="{{ asset('build/images/beer.jpeg') }}" alt="">
+                                <h5 class="card-title">Name: {{ beer.name }}</h5>
+                                <p class="card-text">Description: {{ beer.description }}</p>
+                                <div class="badge badge-primary">Recommended!</div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

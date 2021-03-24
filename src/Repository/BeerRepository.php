@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Beer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -79,5 +80,22 @@ class BeerRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    // TODO: Refacto in DQL
+    public function findBeersByScoreGreaterThan(int $num): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sqlQueries = sprintf(
+            'select * from beer as b inner join statistic as s on b.id = s.beer_id where s.score >= %d;',
+            $num,
+        );
+
+        $stmt = $conn->prepare($sqlQueries);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        return $results;
     }
 }

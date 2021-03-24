@@ -18,13 +18,13 @@ class Statistic
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=beer::class)
+     * @ORM\ManyToOne(targetEntity=Beer::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $beer;
 
     /**
-     * @ORM\ManyToOne(targetEntity=client::class)
+     * @ORM\ManyToOne(targetEntity=Client::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $client;

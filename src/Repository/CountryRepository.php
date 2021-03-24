@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Country|null findOneBy(array $criteria, array $orderBy = null)
  * @method Country[]    findAll()
  * @method Country[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+
  */
 class CountryRepository extends ServiceEntityRepository
 {

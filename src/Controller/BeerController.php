@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Repository\BeerRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CountryRepository;
+use App\Repository\StatisticRepository;
 use App\Services\HelloService;
 use App\Services\HelperParserService;
+use App\Services\RecommendationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,14 +50,32 @@ class BeerController extends AbstractController
     /**
      * @Route("/beer/all", name="beers")
      * @param BeerRepository $beerRepository
+     * @param RecommendationService $recommendationService
      * @return Response
-    */
-    public function beers(BeerRepository $beerRepository): Response
+     */
+    public function beers(BeerRepository $beerRepository, RecommendationService $recommendationService): Response
     {
+        $beers = $beerRepository->findAll();
+
         return $this->render('beer/beers.html.twig', [
             'beers' => [
                 'title' => 'The beers',
-                'content' => $beerRepository->findAll(),
+                'content' => $recommendationService->addRecommendation($beers),
+            ],
+        ]);
+    }
+
+    /**
+     * @Route("/beer/recommended", name="beer_recommended")
+     * @param BeerRepository $beerRepository
+     * @return Response
+     */
+    public function recommended(BeerRepository $beerRepository): Response
+    {
+        return $this->render('beer/recommended.html.twig', [
+            'beers' => [
+                'title' => 'The beers',
+                'content' => $beerRepository->findBeersByScoreGreaterThan(16),
             ],
         ]);
     }
@@ -63,13 +83,15 @@ class BeerController extends AbstractController
     /**
      * @Route("/beer/{id}", name="beer")
      * @param BeerRepository $beerRepository
+     * @param StatisticRepository $statisticRepository
      * @param CountryRepository $countryRepository
      * @param CategoryRepository $categoryRepository
      * @param int $id
      * @return Response
-    */
+     */
     public function beer(
         BeerRepository $beerRepository,
+        StatisticRepository $statisticRepository,
         CountryRepository $countryRepository,
         CategoryRepository $categoryRepository,
         int $id
@@ -80,6 +102,8 @@ class BeerController extends AbstractController
         if (!$beer) {
             return $this->redirectToRoute('homepage');
         }
+
+        $beerStat = $statisticRepository->findOneBy(['beer' => $id]);
 
         if ($beer->getCountry()) {
             $idCountry = $beer->getCountry()->getId();
@@ -98,6 +122,7 @@ class BeerController extends AbstractController
 
         return $this->render('beer/beer.html.twig', [
             'beer' => $beer,
+            'evaluation' => $beerStat ? $beerStat->getScore() : null,
             'categories' => $categoriesName,
         ]);
     }
