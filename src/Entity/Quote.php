@@ -6,6 +6,7 @@ use App\Repository\QuoteRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=QuoteRepository::class)
@@ -29,16 +30,23 @@ class Quote
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     min= 5,
+     *     max = 30,
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Choice({"important", "none"})
      */
     private $position;
 

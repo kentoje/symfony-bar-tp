@@ -37,7 +37,10 @@ class QuoteFixtures extends Fixture
                     $this->faker->firstNameFemale,
                     addslashes('`'),
                 ))
-                ->setPosition($this->faker->randomElement([self::PRIORITY_IMPORTANT, self::PRIORITY_NONE]))
+                ->setPosition($this->faker->randomElement([
+                    self::PRIORITY_IMPORTANT,
+                    self::PRIORITY_NONE,
+                ]))
                 ->setCreatedAt($this->faker->dateTime)
             ;
 
