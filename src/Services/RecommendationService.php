@@ -15,7 +15,13 @@ class RecommendationService {
     public function addRecommendation(array $arr): array
     {
         return array_map(function($obj) {
-            $evaluation = $this->statistic->findOneBy(['beer' => $obj->getId()]);
+            $evaluations = $this->statistic->findBy(['beer' => $obj->getId()]);
+
+            usort($evaluations, static function ($a, $b) {
+                return $a->getScore() <=> $b->getScore();
+            });
+
+            $evaluation = end($evaluations);
 
             if (!$evaluation) {
                 return ['info' => $obj,];

@@ -12,12 +12,14 @@
             <div class="row">
                 {% for beer in beers.content %}
                     <div class="col-sm-6">
-                        <a href="{{ path('beer', { 'id': beer.id }) }}" class="card">
+                        <a href="{{ path('beer', { 'id': beer.info.id }) }}" class="card">
                             <div class="card-body">
                                 <img src="{{ asset('build/images/beer.jpeg') }}" alt="">
-                                <h5 class="card-title">Name: {{ beer.name }}</h5>
-                                <p class="card-text">Description: {{ beer.description }}</p>
-                                <div class="badge badge-primary">Recommended!</div>
+                                <h5 class="card-title">Name: {{ beer.info.name }}</h5>
+                                <p class="card-text">Description: {{ beer.info.description }}</p>
+                                {% if beer.recommended is defined and beer.recommended == true %}
+                                    <div class="badge badge-primary">Recommended!</div>
+                                {% endif %}
                             </div>
                         </a>
                     </div>

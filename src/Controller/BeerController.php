@@ -68,14 +68,15 @@ class BeerController extends AbstractController
     /**
      * @Route("/beer/recommended", name="beer_recommended")
      * @param BeerRepository $beerRepository
+     * @param RecommendationService $recommendationService
      * @return Response
      */
-    public function recommended(BeerRepository $beerRepository): Response
+    public function recommended(BeerRepository $beerRepository, RecommendationService $recommendationService): Response
     {
         return $this->render('beer/recommended.html.twig', [
             'beers' => [
                 'title' => 'The beers',
-                'content' => $beerRepository->findBeersByScoreGreaterThan(16),
+                'content' => $recommendationService->filterRecommendation($beerRepository->findAll()),
             ],
         ]);
     }
