@@ -10,6 +10,8 @@ use Faker\Generator;
 
 class QuoteFixtures extends Fixture
 {
+    public const PRIORITY_NONE = 'none';
+    public const PRIORITY_IMPORTANT = 'important';
     public const MAX = 10;
 
     private Generator $faker;
@@ -35,6 +37,8 @@ class QuoteFixtures extends Fixture
                     $this->faker->firstNameFemale,
                     addslashes('`'),
                 ))
+                ->setPosition($this->faker->randomElement([self::PRIORITY_IMPORTANT, self::PRIORITY_NONE]))
+                ->setCreatedAt($this->faker->dateTime)
             ;
 
             $manager->persist($quote);

@@ -22,7 +22,12 @@ class QuoteController extends AbstractController
      */
     public function index(QuoteRepository $quoteRepository, HelperParserService $helperParser): Response
     {
-        $quotes = $quoteRepository->findAll();
+        $quotesImportant = $quoteRepository->findBy(['position' => 'important'], ['created_at' => 'DESC']);
+        $quotesNone = $quoteRepository->findBy(['position' => 'none'], ['created_at' => 'DESC']);
+        $quotes = [
+            ...$quotesImportant,
+            ...$quotesNone,
+        ];
 
         return $this->render('quote/index.html.twig', [
             'quotes' => $helperParser->parseObjects(

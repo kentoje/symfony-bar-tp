@@ -26,6 +26,14 @@
                   Quotes <span class="sr-only">(current)</span>
               </a>
           </li>
+          <li>
+              <a
+                      class="nav-link {{ routeName == 'quote_new' ? 'active' : '' }}"
+                      href="{{ path('quote_new') }}"
+              >
+                  New Quote <span class="sr-only">(current)</span>
+              </a>
+          </li>
           {% for category in categories %}
             <li class="nav-item">
               <a

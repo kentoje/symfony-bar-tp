@@ -10,7 +10,9 @@
         </div>
         <div class="bar col-sm-6">
             <div class="row">
-                {{ form(form) }}
+                {{ form_start(form, { 'attr': {'novalidate': 'novalidate'} }) }}
+                    {{ form_widget(form) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
