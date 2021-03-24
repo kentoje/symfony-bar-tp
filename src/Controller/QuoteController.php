@@ -16,6 +16,10 @@ class QuoteController extends AbstractController
 {
     public const PRIORITY_NONE = 'none';
     public const PRIORITY_IMPORTANT = 'important';
+    public const MESSAGES = [
+        'new' => 'Quote added!',
+        'modify' => 'Quote modified!',
+    ];
 
     /**
      * @Route("/quotes", name="quotes")
@@ -63,6 +67,7 @@ class QuoteController extends AbstractController
     ): Response
     {
         $quote = $quoteRepository->findOneBy(['id' => $id]);
+        $message = self::MESSAGES['modify'];
 
         if (!$quote && $request->attributes->get('_route') === 'quote_modify') {
             throw $this->createNotFoundException('The quote does not exist.');
@@ -70,6 +75,7 @@ class QuoteController extends AbstractController
 
         if (!$quote) {
             $quote = new Quote();
+            $message = self::MESSAGES['new'];
         }
 
         $form = $this->createForm(QuoteType::class, $quote);
@@ -78,6 +84,8 @@ class QuoteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($quote);
             $manager->flush();
+
+            $this->addFlash('success', $message);
 
             return $this->redirectToRoute('quotes');
         }
@@ -115,6 +123,8 @@ class QuoteController extends AbstractController
 
         $manager->remove($quote);
         $manager->flush();
+
+        $this->addFlash('success', 'Quote deleted!');
 
         return $this->redirectToRoute('quotes');
     }
